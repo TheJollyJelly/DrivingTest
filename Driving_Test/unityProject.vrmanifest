@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.driving_test.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "L:\\Year 2\\Principles Of VR\\DrivingTestProject\\DrivingTest\\Driving_Test\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "Driving_Test [Testing]"
+        }
+      }
+    }
+  ]
+}
