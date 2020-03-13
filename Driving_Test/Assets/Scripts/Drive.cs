@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class RearWheelDrive : MonoBehaviour
+public class Drive : MonoBehaviour
 {
 
     private WheelCollider[] wheels;
@@ -9,8 +10,8 @@ public class RearWheelDrive : MonoBehaviour
     public float maxAngle = 30;
     public float maxTorque = 300;
     public GameObject wheelShape;
-    public Joystick jstk;
-    public SteeringWheel sw;
+    public DrivingStick jstk;
+    public DrivingWheel sw;
     //public acc
     // here we find all the WheelColliders down in the hierarchy
     public void Start()
