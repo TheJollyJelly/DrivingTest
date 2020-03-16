@@ -3,25 +3,33 @@ using System.Collections.Generic;
 using Oculus;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement : Player
 {
-    public Vector3 position;
     public float Speed = 0;
     public float MaxSpeed = 10;
     public float Acceleration = 10;
     public float Deceleration = 10;
     public float rotateSpeed = 2;
 
+    public GameObject pass;
+    public GameObject fail;
+
+
+    void Start()
+    {
+        pass.SetActive(false);
+        fail.SetActive(false);
+    }
 
     void Update()
     {
-        if ((OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)) && (Speed < MaxSpeed))
+        if ((OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)))
         {
-            Speed = Speed - (Acceleration * Time.deltaTime);
+            transform.position -= transform.forward * Time.deltaTime * MaxSpeed;
         }
-        else if ((OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger)) && (Speed > -MaxSpeed))
+        else if ((OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger)))
         {
-            Speed = Speed + (Acceleration * Time.deltaTime);
+            transform.position += transform.forward * Time.deltaTime * MaxSpeed;
         }
         else
         {
@@ -39,13 +47,32 @@ public class Movement : MonoBehaviour
             }
         }
 
-
-        position.z = transform.position.z + Speed * Time.deltaTime;
-        transform.position = position;
-
-        if (OVRInput.Get(OVRInput.Button.SecondaryThumbstick))
+        if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight))
         {
-            transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
+            transform.Rotate(0, Time.deltaTime * rotateSpeed, 0);
         }
+        if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft))
+        {
+            transform.Rotate(0, Time.deltaTime * -rotateSpeed, 0);
+        }
+
+        //if (Points >= 75)
+        //{
+        //    pass.SetActive(true);
+        //}
+        //if (Points <= 74)
+        //{
+        //    fail.SetActive(true);
+        //}
     }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Cone")
+        {
+            Points --;
+        }
+
+    }
+
 }
